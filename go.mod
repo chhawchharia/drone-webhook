@@ -14,6 +14,6 @@ require (
 	gopkg.in/yaml.v2 v2.2.2 // indirect
 )
 
-go 1.20
+go 1.26.10
 
 toolchain go1.26.10
