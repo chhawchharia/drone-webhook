@@ -20,7 +20,6 @@ steps:
         path: "/go"
   - name: test
     image: golang:1.26.10@sha256:672c944cfd07599b5f1bb179869270cdc94c6254e41db4d431259693cb286b82
-    pull: always
     commands:
       - go test -cover ./...
     volumes:
@@ -56,7 +55,6 @@ steps:
       - go env
   - name: build
     image: golang:1.26.10@sha256:672c944cfd07599b5f1bb179869270cdc94c6254e41db4d431259693cb286b82
-    pull: always
     environment:
       CGO_ENABLED: "0"
     commands:
@@ -64,8 +62,6 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      pull_image: true
-      no_cache: true
       dockerfile: docker/Dockerfile.linux.amd64
       repo: plugins/webhook
       username:
@@ -103,7 +99,6 @@ steps:
       - go env
   - name: build
     image: golang:1.26.10@sha256:672c944cfd07599b5f1bb179869270cdc94c6254e41db4d431259693cb286b82
-    pull: always
     environment:
       CGO_ENABLED: "0"
     commands:
@@ -111,8 +106,6 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      pull_image: true
-      no_cache: true
       dockerfile: docker/Dockerfile.linux.arm64
       repo: plugins/webhook
       username:
@@ -141,7 +134,7 @@ pool:
 
 steps:
   - name: environment
-    image: plugins/base:windows-1809-amd64@sha256:037b6b2c8e2b78edab67bddc10f2fc64c90dd14a81489e67a830b37bec25ff02
+    image: golang:1.20
     pull: always
     environment:
       CGO_ENABLED: "0"
@@ -150,8 +143,7 @@ steps:
       - go version
       - go env
   - name: build
-    image: plugins/base:windows-1809-amd64@sha256:037b6b2c8e2b78edab67bddc10f2fc64c90dd14a81489e67a830b37bec25ff02
-    pull: always
+    image: golang:1.20
     environment:
       CGO_ENABLED: "0"
     commands:
@@ -160,8 +152,6 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      pull_image: true
-      no_cache: true
       dockerfile: docker/Dockerfile.windows.1809
       repo: plugins/webhook
       username:
@@ -205,7 +195,6 @@ steps:
       - go env
   - name: build
     image: golang:1.26.10-windowsservercore-ltsc2022@sha256:c3eadda68ea666345f08d09104362a03a255e7ae1ff42d1b3897f4dbd698e222
-    pull: always
     environment:
       CGO_ENABLED: "0"
     commands:
@@ -213,8 +202,6 @@ steps:
   - name: docker
     image: plugins/docker
     settings:
-      pull_image: true
-      no_cache: true
       dockerfile: docker/Dockerfile.windows.ltsc2022
       repo: plugins/webhook
       username:
